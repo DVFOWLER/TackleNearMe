@@ -1,0 +1,18 @@
+.main-header {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 15px 40px;
+  background: var(--gradient);
+  background-size: 200% 200%;
+  animation: headerGradient 8s ease infinite;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+@keyframes headerGradient { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+.logo { font-size: 1.6rem; font-weight: 900; color: white; text-decoration: none; }
+.nav-links { display: flex; gap: 25px; align-items: center; }
+.nav-links a { color: white; text-decoration: none; font-weight: 600; transition: opacity 0.2s; }
+.nav-links a:hover { opacity: 0.8; }
+
+.user-tag { background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 20px; font-size: 14px; }
