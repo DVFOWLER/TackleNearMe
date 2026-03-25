@@ -3,35 +3,59 @@
   --primary-purple: #4c35de;
   --dark-bg: #1a1a1a;
   --light-gray: #f8f9fa;
+  --footer-dark: #0b1a2a;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
-/* Layout Containers */
-.home-container, .shop-container, .history-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
+/* --- FULL SCREEN FIX --- */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
 }
 
-/* Hero */
+/* This wrapper ensures the footer stays at the bottom */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+main {
+  flex: 1; /* This pushes the footer down */
+  width: 100%;
+}
+
+/* --- LAYOUT CONTAINERS (CHANGED TO FULL WIDTH) --- */
+.home-container, .shop-container, .history-container, .locations-page {
+  width: 100%;
+  padding: 40px 5%; /* Using % instead of fixed px for fluid width */
+  margin: 0;
+}
+
+/* Hero Section - Full Width */
 .hero-section {
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200');
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+              url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200');
   height: 500px;
+  width: 100%; /* Ensure full width */
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   text-align: center;
-  border-radius: 20px;
+  border-radius: 0; /* Removed border radius for a full-bleed look */
 }
 
-/* Grids */
+/* Grids - Now Spans Full Width */
 .product-grid, .category-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
   margin-top: 30px;
+  width: 100%;
 }
 
 .product-card, .cat-card {
@@ -42,34 +66,23 @@
   text-align: center;
 }
 
-/* Auth Cards (Login/Register) */
-.auth-page { height: 80vh; display: flex; align-items: center; justify-content: center; background: #f4f4f4; }
-.auth-card { background: white; padding: 40px; border-radius: 15px; width: 100%; max-width: 400px; text-align: center; }
-.auth-card input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; }
-.auth-btn { width: 100%; background: #4c35de; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; }
-
-/* Table */
-.history-table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
-.history-table th, .history-table td { padding: 15px; border-bottom: 1px solid #eee; text-align: left; }
-.status.delivered { color: green; font-weight: bold; }
-.status.processing { color: orange; font-weight: bold; }
-
-/* Navbar Fix */
+/* --- NAVBAR FIX (FULL WIDTH) --- */
 .navbar {
   background-color: var(--primary-purple);
   padding: 1rem 0;
   position: sticky;
   top: 0;
   z-index: 1000;
+  width: 100%;
 }
 
 .nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 100%; /* Removed the 1200px limit */
+  padding: 0 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
 }
 
 .nav-logo {
@@ -94,60 +107,52 @@
 
 .nav-links a:hover { color: white; }
 
-/* Login/Logout Design */
-.logout-btn {
-  background: white;
-  color: var(--primary-purple);
-  border: none;
-  padding: 8px 18px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-weight: bold;
+/* --- AUTH PAGES (LOGIN/REGISTER) --- */
+.auth-page { 
+  min-height: 80vh; 
+  width: 100%;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  background: var(--light-gray); 
 }
 
-.login-page {
-  height: 90vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--light-gray);
-}
-
-.login-card {
-  background: white;
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+.auth-card { 
+  background: white; 
+  padding: 40px; 
+  border-radius: 15px; 
+  width: 90%; 
+  max-width: 450px; 
   text-align: center;
-  width: 100%;
-  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
-.login-card input {
+/* --- FOOTER (FIXED TO BOTTOM & FULL WIDTH) --- */
+.footer {
   width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
-
-.login-btn {
-  width: 100%;
-  background-color: var(--primary-purple);
+  background-color: var(--footer-dark);
   color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 8px;
-  margin-top: 10px;
-  cursor: pointer;
+  padding: 50px 0 20px 0;
+  margin-top: auto; /* Required for the Flexbox push */
 }
 
-/* Footer alignment (Cake-shop style) */
 .footer-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 40px;
-  max-width: 1200px;
-  margin: 50px auto;
-  padding: 0 20px;
+  width: 100%;
+  padding: 0 5%;
 }
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin-top: 30px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+/* Table Fix */
+.history-table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
+.history-table th, .history-table td { padding: 15px; border-bottom: 1px solid #eee; text-align: left; }
