@@ -12,14 +12,24 @@ import Cart from './pages/Cart';
 import Login from './pages/Login';
 
 // Components
-import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import LoadingSpinner from './components/LoadingSpinner'; 
+import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
 
-// Management Pages
-import AdminDashboard from './management/AdminDashboard';
-import SellerDashboard from './management/SellerDashboard';
+// Admin Management Pages
+import AdminDashboard from './management/admin/AdminDashboard';
+import UserManagement from './management/admin/UserManagement';
+import AdminSellerView from './management/admin/SellerDashboard';
+import ProductOverview from './management/admin/ProductOverview';
+import Reports from './management/admin/Report';
 
-// Styles - Import the new Global style here
+// Seller Management Pages
+import SellerMainDashboard from './management/seller/SellerDashboard'; 
+import ProductManagement from './management/seller/ProductManagement';
+import OrderManagement from './management/seller/OrderManagement';
+
+// Styles
 import './styles/Global.css'; 
 
 function App() {
@@ -52,12 +62,12 @@ function App() {
 
   return (
     <Router>
-      {/* We use "app-background" from Global.css to ensure the 
-          fishing background image covers the whole screen properly.
-      */}
       <div className="app-background">
         
-        {user && <Navbar user={user} onLogout={handleLogout} />}
+        {/* Navbar only shows for regular users */}
+        {user && !['admin', 'seller'].includes(user.role) && (
+          <Navbar user={user} onLogout={handleLogout} />
+        )}
         
         <main>
           <Routes>
@@ -73,24 +83,47 @@ function App() {
             <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
             <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
 
-            {/* Management Routes - Only for Admin/Seller */}
-            <Route path="/admin" element={
+            {/* --- ADMIN NESTED ROUTES --- */}
+            <Route path="/admin/*" element={
               <ProtectedRoute allowedRoles={['admin']}>
-                <AdminDashboard />
+                <div className="dashboard-layout">
+                  <Sidebar user={user} onLogout={handleLogout} />
+                  <div className="main-view">
+                    <Routes>
+                      <Route index element={<AdminDashboard />} />
+                      <Route path="users" element={<UserManagement />} />
+                      <Route path="products" element={<ProductOverview />} />
+                      <Route path="reports" element={<Reports />} />
+                      <Route path="sellers-list" element={<AdminSellerView />} />
+                    </Routes>
+                  </div>
+                </div>
               </ProtectedRoute>
             } />
 
-            <Route path="/seller" element={
+            {/* --- SELLER NESTED ROUTES --- */}
+            <Route path="/seller/*" element={
               <ProtectedRoute allowedRoles={['seller']}>
-                <SellerDashboard />
+                <div className="dashboard-layout">
+                  <Sidebar user={user} onLogout={handleLogout} />
+                  <div className="main-view">
+                    <Routes>
+                      <Route index element={<SellerMainDashboard />} />
+                      <Route path="products" element={<ProductManagement />} />
+                      <Route path="orders" element={<OrderManagement />} />
+                    </Routes>
+                  </div>
+                </div>
               </ProtectedRoute>
             } />
 
+            {/* Catch-all Redirect */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
         
-        {user && <Footer />}
+        {/* Hide footer on management pages */}
+        {user && !['admin', 'seller'].includes(user.role) && <Footer />}
       </div>
     </Router>
   );

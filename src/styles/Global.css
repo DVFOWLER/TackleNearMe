@@ -1,35 +1,32 @@
-/* Core Variables */
+/* src/styles/Global.css */
 :root {
-  --primary-blue: #4f46e5;
-  --dark-bg: #0f172a;
+  --primary: #4f46e5;
+  --glass: rgba(0, 0, 0, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.1);
 }
 
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
+  color: white;
 }
 
-/* Background Image Fix */
+/* Background Fix */
 .app-background {
   min-height: 100vh;
   background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-              url('../assets/hero.png'); 
+              url('../assets/hero.png') no-repeat center center fixed;
   background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  color: white;
-  display: flex;
-  flex-direction: column;
 }
 
-/* Header/Navbar Fix */
+/* NAVBAR ALIGNMENT FIX */
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* logo left, links center, auth right */
   align-items: center;
-  background: var(--primary-blue);
-  padding: 0 50px;
-  height: 70px;
+  background: var(--primary);
+  padding: 0 40px;
+  height: 75px;
   position: fixed;
   top: 0;
   width: 100%;
@@ -37,14 +34,7 @@ body {
   box-sizing: border-box;
 }
 
-.nav-logo a {
-  font-size: 22px;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-}
-
-/* This removes the vertical dots */
+/* This removes the vertical dots from your screenshot */
 .nav-links {
   display: flex;
   list-style: none;
@@ -56,52 +46,47 @@ body {
 .nav-links a {
   color: white;
   text-decoration: none;
-  font-size: 0.95rem;
+  font-weight: 500;
 }
 
+/* Auth Section Styling */
 .nav-auth {
   display: flex;
+  gap: 10px;
   align-items: center;
-  gap: 15px;
 }
+
+.btn-pill {
+  padding: 8px 15px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  color: white;
+  font-weight: bold;
+}
+
+.btn-pill.user { background: #10b981; }
+.btn-pill.seller { background: #3b82f6; }
+.btn-pill.admin { background: #f59e0b; }
 
 .logout-btn {
-  background: white;
-  color: var(--primary-blue);
+  background: #ff4757;
+  color: white;
   border: none;
-  padding: 6px 15px;
-  border-radius: 5px;
-  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: bold;
 }
 
-/* Main Layout Fixes */
-main.container {
-  flex: 1;
-  padding-top: 100px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Footer Fix */
-footer {
-  background: var(--dark-bg);
-  padding: 40px 20px;
-  text-align: center;
-}
-
-footer ul {
-  list-style: none; /* Removes footer dots */
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 20px;
-}
-
-footer a {
-  color: #94a3b8;
-  text-decoration: none;
+/* Main Content Wrapper */
+.glass-panel {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 40px;
+  width: 90%;
+  max-width: 1200px;
+  margin: 110px auto 40px auto; /* Pushes content below the navbar */
 }
