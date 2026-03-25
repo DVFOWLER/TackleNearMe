@@ -1,29 +1,26 @@
 import React from 'react';
-import '../styles/Global.css';
+import "../styles/Global.css";
 
 const Shop = () => {
-  return (
-    <div className="glass-panel">
-      <h2 style={{ marginBottom: '20px' }}>Shop</h2>
-      
-      {/* Category Tabs */}
-      <div className="category-tabs">
-        <button className="active">All</button>
-        <button>Rods</button>
-        <button>Reels</button>
-        <button>Lines</button>
-      </div>
+  const products = [
+    { id: 1, name: "Carbon Fiber Rod", price: "₱2,500", img: "https://via.placeholder.com/150" },
+    { id: 2, name: "Spinning Reel", price: "₱1,800", img: "https://via.placeholder.com/150" },
+    { id: 3, name: "Braided Line 300m", price: "₱850", img: "https://via.placeholder.com/150" },
+    { id: 4, name: "Lure Set (6pcs)", price: "₱450", img: "https://via.placeholder.com/150" },
+  ];
 
+  return (
+    <div className="shop-container">
+      <h2 className="section-title">All Fishing Gear</h2>
       <div className="product-grid">
-        {/* Repeating Product Cards */}
-        <div className="product-card">
-          <div className="stock-badge">Out of Stock</div>
-          <img src="path-to-rod.jpg" alt="Spinning Rod" />
-          <div className="card-info">
-            <h4>Spinning Rod</h4>
-            <p>₱1,200</p>
+        {products.map(product => (
+          <div key={product.id} className="product-card">
+            <img src={product.img} alt={product.name} />
+            <h3>{product.name}</h3>
+            <p className="price">{product.price}</p>
+            <button className="add-btn">Add to Cart</button>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );

@@ -7,6 +7,53 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
+/* Layout Containers */
+.home-container, .shop-container, .history-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Hero */
+.hero-section {
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200');
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  border-radius: 20px;
+}
+
+/* Grids */
+.product-grid, .category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.product-card, .cat-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+/* Auth Cards (Login/Register) */
+.auth-page { height: 80vh; display: flex; align-items: center; justify-content: center; background: #f4f4f4; }
+.auth-card { background: white; padding: 40px; border-radius: 15px; width: 100%; max-width: 400px; text-align: center; }
+.auth-card input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; }
+.auth-btn { width: 100%; background: #4c35de; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; }
+
+/* Table */
+.history-table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
+.history-table th, .history-table td { padding: 15px; border-bottom: 1px solid #eee; text-align: left; }
+.status.delivered { color: green; font-weight: bold; }
+.status.processing { color: orange; font-weight: bold; }
+
 /* Navbar Fix */
 .navbar {
   background-color: var(--primary-purple);

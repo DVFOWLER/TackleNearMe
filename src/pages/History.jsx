@@ -1,20 +1,35 @@
 import React from 'react';
+import "../styles/Global.css";
 
 const History = () => {
+  const orders = [
+    { id: "ORD-101", date: "2026-03-20", total: "₱3,350", status: "Delivered" },
+    { id: "ORD-105", date: "2026-03-24", total: "₱850", status: "Processing" },
+  ];
+
   return (
-    <div className="history-page">
-      <div className="history-banner">
-        <div className="banner-overlay">
-          <h1>HISTORY OF THE FISHING ROD</h1>
-        </div>
-      </div>
-      <div className="history-content-card">
-        <h3>Our Journey</h3>
-        <p>
-          Started in 2024, TackleNearMe began supplying reliable fishing gear to local anglers, 
-          growing into a nationwide online-first shop.
-        </p>
-      </div>
+    <div className="history-container">
+      <h2>Order History</h2>
+      <table className="history-table">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Date</th>
+            <th>Total</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orders.map(order => (
+            <tr key={order.id}>
+              <td>{order.id}</td>
+              <td>{order.date}</td>
+              <td>{order.total}</td>
+              <td><span className={`status ${order.status.toLowerCase()}`}>{order.status}</span></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
