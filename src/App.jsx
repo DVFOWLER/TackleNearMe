@@ -28,6 +28,7 @@ import Reports from './management/admin/Report';
 import SellerMainDashboard from './management/seller/SellerDashboard'; 
 import ProductManagement from './management/seller/ProductManagement';
 import OrderManagement from './management/seller/OrderManagement';
+import Register from './pages/Register'; // Make sure this path is right
 
 // Styles
 import './styles/Global.css'; 
@@ -80,6 +81,7 @@ function App() {
             <Route path="/locations" element={<ProtectedRoute><Locations /></ProtectedRoute>} />
             <Route path="/history" element={<ProtectedRoute><History /></ProtectedRoute>} />
             <Route path="/updates" element={<ProtectedRoute><Updates /></ProtectedRoute>} />
+            <Route path="/register" element={<Register />} />
             <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
             <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
 

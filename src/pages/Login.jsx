@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react'; // Added useState
+import { useNavigate, Link } from 'react-router-dom'; // Added Link
 import "../styles/Global.css";
 
 const Login = () => {
@@ -9,39 +9,63 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Simulating login logic
-    const userData = { email, role: email.includes('admin') ? 'admin' : 'user' };
-    localStorage.setItem('user', JSON.stringify(userData));
     
-    if (userData.role === 'admin') {
+    // 1. Get all registered users from localStorage
+    const users = JSON.parse(localStorage.getItem('all_users') || '[]');
+    
+    // 2. Check for Admin (Hardcoded)
+    if (email === "admin@tackle.com" && password === "admin123") {
+      const adminUser = { email, role: 'admin', name: 'System Admin' };
+      localStorage.setItem('user', JSON.stringify(adminUser));
       navigate('/admin');
+      return;
+    }
+
+    // 3. Check for Registered Users (Sellers or Customers)
+    const foundUser = users.find(u => u.email === email && u.password === password);
+
+    if (foundUser) {
+      localStorage.setItem('user', JSON.stringify(foundUser));
+      // Redirect based on role
+      if (foundUser.role === 'seller') {
+        navigate('/management/admin/SellerDashboard'); // Path to your seller view
+      } else {
+        navigate('/'); // Customers go Home
+      }
     } else {
-      navigate('/');
+      alert("Invalid email or password. Please try again or Register.");
     }
   };
 
   return (
-    <div className="login-page">
-      <div className="login-card">
+    <div className="auth-page">
+      <div className="auth-card">
         <h2>Welcome Back</h2>
-        <p>Login to manage your fishing gear</p>
+        <p>Login to TackleNearMe</p>
         <form onSubmit={handleLogin}>
-          <input 
-            type="email" 
-            placeholder="Email Address" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-            required 
-          />
-          <input 
-            type="password" 
-            placeholder="Password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            required 
-          />
-          <button type="submit" className="login-btn">Login</button>
+          <div className="input-group">
+            <input 
+              type="email" 
+              placeholder="Email Address" 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+              required 
+            />
+          </div>
+          <div className="input-group">
+            <input 
+              type="password" 
+              placeholder="Password" 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              required 
+            />
+          </div>
+          <button type="submit" className="auth-btn">Login</button>
         </form>
+        <div className="auth-footer">
+          <p>Don't have an account? <Link to="/register">Register here</Link></p>
+        </div>
       </div>
     </div>
   );
