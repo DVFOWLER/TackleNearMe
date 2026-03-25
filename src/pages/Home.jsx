@@ -1,23 +1,23 @@
 import React from 'react';
-import '../styles/Global.css';
+import { useNavigate } from 'react-router-dom';
+import "../styles/Global.css";
 
-const Home = () => {
+const Hero = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="glass-panel">
-      <section style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
-        <div>
-          <h1>Reliable Fishing Gear — Delivered</h1>
+    <section className="hero-section">
+      <div className="hero-overlay">
+        <div className="hero-content">
+          <h1>Reliable Fishing Gear — <br/><span>Delivered</span></h1>
           <p>Rods, reels, lures, and more. Curated by anglers, for anglers.</p>
-          <button className="logout-btn" style={{ background: '#4f46e5' }}>Shop Now</button>
+          <button className="shop-now-btn" onClick={() => navigate('/shop')}>
+            Shop Now
+          </button>
         </div>
-        <img 
-          src="https://scontent.fcgy3-2.fna.fbcdn.net/v/t39.30808-6/615359343_1183922140537932_3099401591448812127_n.jpg" 
-          alt="Hero" 
-          style={{ width: '400px', borderRadius: '15px' }}
-        />
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 
-export default Home;
+export default Hero;
