@@ -1,61 +1,32 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
-  const [showCheckout, setShowCheckout] = useState(false);
-  const [addressInfo, setAddressInfo] = useState({
-    name: '',
-    phone: '',
-    address: '',
-    description: '' // Optional (color of house, etc.)
-  });
+  const navigate = useNavigate();
+  // Change this to your actual cart state logic later
+  const [cartItems, setCartItems] = useState([]); 
+  const [step, setStep] = useState(1);
+  const [info, setInfo] = useState({ name: '', phone: '', address: '', note: '' });
 
-  const handleCheckout = (e) => {
-    e.preventDefault();
-    alert(`Order placed for ${addressInfo.name}! We will deliver to ${addressInfo.address}.`);
-    // Here you would normally clear the cart
-  };
+  if (cartItems.length === 0) {
+    return (
+      <div className="shop-container" style={{ textAlign: 'center', padding: '100px 20px' }}>
+        <div style={{ backgroundColor: '#4dd0e1', color: 'white', padding: '20px', borderRadius: '5px', marginBottom: '20px' }}>
+          Your cart is currently empty.
+        </div>
+        <button 
+          onClick={() => navigate('/shop')} 
+          style={{ backgroundColor: '#ffb300', color: 'white', border: 'none', padding: '10px 20px', fontWeight: 'bold', cursor: 'pointer' }}
+        >
+          RETURN TO SHOP
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="shop-container">
-      <h2>Your Cart</h2>
-      
-      {!showCheckout ? (
-        <div className="cart-summary">
-          <p>Your items go here...</p>
-          <button className="auth-btn" onClick={() => setShowCheckout(true)}>
-            Proceed to Checkout
-          </button>
-        </div>
-      ) : (
-        <div className="checkout-form auth-card" style={{margin: '0 auto'}}>
-          <h3>Delivery Details</h3>
-          <form onSubmit={handleCheckout}>
-            <input 
-              type="text" placeholder="Full Name" required 
-              onChange={(e) => setAddressInfo({...addressInfo, name: e.target.value})} 
-            />
-            <input 
-              type="text" placeholder="Phone Number" required 
-              onChange={(e) => setAddressInfo({...addressInfo, phone: e.target.value})} 
-            />
-            <input 
-              type="text" placeholder="Complete Delivery Address" required 
-              onChange={(e) => setAddressInfo({...addressInfo, address: e.target.value})} 
-            />
-            <textarea 
-              placeholder="House description (Color of house, landmarks, etc.) - Optional" 
-              onChange={(e) => setAddressInfo({...addressInfo, description: e.target.value})}
-              style={{width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #ddd', marginTop: '10px'}}
-            />
-            <button type="submit" className="auth-btn" style={{marginTop: '20px'}}>
-              Place Order Now
-            </button>
-            <button type="button" onClick={() => setShowCheckout(false)} style={{background: 'none', color: 'gray', border: 'none', marginTop: '10px', cursor: 'pointer'}}>
-              Go Back
-            </button>
-          </form>
-        </div>
-      )}
+      {/* Checkout logic from previous step goes here if cart is NOT empty */}
     </div>
   );
 };

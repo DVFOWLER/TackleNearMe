@@ -84,6 +84,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
             <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+            
 
             {/* --- ADMIN NESTED ROUTES --- */}
             <Route path="/admin/*" element={
