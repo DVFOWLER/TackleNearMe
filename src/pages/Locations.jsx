@@ -1,40 +1,38 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const Locations = () => {
-  const [city, setCity] = useState("");
-
   const branches = [
-    { name: "Cagayan de Oro", branch: "Main Branch", img: "cdo.jpg" },
-    { name: "Davao City", branch: "Lanang Branch", img: "davao.jpg" },
-    { name: "Manila", branch: "Ermita Branch", img: "manila.jpg" },
-    { name: "Iloilo", branch: "City Proper Branch", img: "iloilo.jpg" },
-    { name: "Cebu", branch: "IT Park Branch", img: "cebu.jpg" },
+    { city: "Cagayan de Oro", area: "Main Branch", img: "https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?q=80&w=400" },
+    { city: "Davao City", area: "Lanang Branch", img: "https://images.unsplash.com/photo-1542362567-b05500281774?q=80&w=400" },
+    { city: "Manila", area: "Ermita Branch", img: "https://images.unsplash.com/photo-1555620920-54041da5679e?q=80&w=400" },
+    { city: "Iloilo", area: "City Proper Branch", img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=400" },
+    { city: "Cebu", area: "IT Park Branch", img: "https://images.unsplash.com/photo-1533000932822-671e20428670?q=80&w=400" }
   ];
 
   return (
     <div className="locations-page">
-      <h2>Find Our Branches</h2>
-      <div className="location-search-bar">
-        <select value={city} onChange={(e) => setCity(e.target.value)}>
-          <option value="">(Select a city)</option>
-          <option value="cdo">Cagayan de Oro</option>
-          <option value="davao">Davao City</option>
-          {/* Add more options */}
-        </select>
-        <input type="text" placeholder="Search..." />
-        <button className="search-btn">Search</button>
+      <div className="dark-container search-section">
+        <h2>Find Our Branches</h2>
+        <div className="search-bar-row">
+          <select><option>(Select a city)</option></select>
+          <input type="text" placeholder="Search..." />
+          <button className="search-btn">Search</button>
+        </div>
       </div>
 
-      <div className="branch-grid">
-        {branches.map((b, index) => (
-          <div key={index} className="branch-card">
-            <div className="branch-img-placeholder"></div>
-            <div className="branch-info">
-              <h3>{b.name}</h3>
-              <p>{b.branch}</p>
+      <div className="dark-container branches-section">
+        <h3>All Branches</h3>
+        <div className="branches-grid">
+          {branches.map((branch, index) => (
+            <div key={index} className="branch-card">
+              <img src={branch.img} alt={branch.city} />
+              <div className="branch-info">
+                <h4>{branch.city}</h4>
+                <p>{branch.area}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
